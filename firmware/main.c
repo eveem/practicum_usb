@@ -19,13 +19,21 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8])
     usbRequest_t *rq = (void *)data;
 
     /* declared as static so they stay valid when usbFunctionSetup returns */
-    static uint8_t switch_state;  
+    static uint8_t switch_state; 
+    static uint8_t light; 
 
     if (rq->bRequest == RQ_SET_LED)
     {
         uint8_t led_val = rq->wValue.bytes[0];
         uint8_t led_no  = rq->wIndex.bytes[0];
         set_led(led_no, led_val);
+        return 0;
+    }
+
+    else if (rq->bRequest == RQ_SET_LED_VALUE)
+    {
+        uint8_t value = rq->wValue.bytes[0];
+        set_led_value(value);
         return 0;
     }
 
@@ -38,6 +46,13 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8])
 
         /* return the number of bytes of data to be returned to host */
         return 1;
+    }
+
+    else if (rq->bRequest == RQ_GET_LIGHT)
+    {
+        light = get_light();
+        usbMsgPtr = &light;
+        return 2;
     }
 
     /* default for not implemented requests: return no data back to host */

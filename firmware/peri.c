@@ -37,5 +37,5 @@ uint16_t read_adc (uint8_t channel)
 
 uint16_t get_light()
 {
-    // วางโค้ดจาก elab
+    return read_adc(PC4);
 }
