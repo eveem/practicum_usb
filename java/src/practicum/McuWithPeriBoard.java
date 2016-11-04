@@ -31,6 +31,7 @@ public class McuWithPeriBoard extends McuBoard
      */
     public void setLedValue(int value)
     {
+    	this.write(RQ_SET_LED_VALUE, (short) 0, (short) value);
     }
 
     /**
@@ -51,6 +52,7 @@ public class McuWithPeriBoard extends McuBoard
      */
     public int getLight()
     {
-        return 0;
+    	byte[] ret = this.read(RQ_GET_LIGHT, (short)0, (short)0);
+    	return (ret[0] + 256)%256 + ((ret[1] + 256)%256)*256;
     }
 }
