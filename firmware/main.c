@@ -20,7 +20,7 @@ usbMsgLen_t usbFunctionSetup(uint8_t data[8])
 
     /* declared as static so they stay valid when usbFunctionSetup returns */
     static uint8_t switch_state; 
-    static uint8_t light; 
+    static uint16_t light; 
 
     if (rq->bRequest == RQ_SET_LED)
     {
