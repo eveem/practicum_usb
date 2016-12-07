@@ -24,20 +24,21 @@ public class TestPeri
             System.out.format("** Practicum board found **\n");
             System.out.format("** Manufacturer: %s\n", peri.getManufacturer());
             System.out.format("** Product: %s\n", peri.getProduct());
-
-            int count = 0;
-
-            while (true) 
+            
+            while (true)
             {
-                Thread.sleep(500);
-                peri.setLedValue(count);
-                boolean sw = peri.getSwitch();
-                int light = peri.getLight();
-                System.out.format("LED set to %d | Switch state: %s | Light: %d\n",
-                        count, sw, light);
-
-                count++;
-                if (count > 7) count = 0;
+            	for (int i = 0; i < 8; i++)
+            	{
+//            		peri.setGreenLed(i, 0);
+            		Thread.sleep(500);
+            	}
+//            	peri.setGreenLed(4, 1);
+            	Thread.sleep(500);
+//            	for (int i = 0; i < 8; i++)
+//            	{
+//            		peri.setGreenLed(i, 1);
+//            		Thread.sleep(500);	
+//            	}             
             }
         }
         catch (Exception e)
